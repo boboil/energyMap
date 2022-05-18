@@ -47,14 +47,13 @@ function prepareTemplate(array) {
                         <p>Стоимость 2500₽/Квт</p>
                     </div>
                     <div class="active-block">
-                        <span>Активация через приложение mdfnjwlnfjwnfnwkfkjwnf wjfjwkbfk ...</span>
+                        <span>${point.description}</span>
                     </div>
                     <div class="station-info">
                         <img src="./images/station-icon.png" alt="station-icon" class="station-img">
                         <div class="id-info"><span>Three Phase (EU) (currently same ID)</span>
                             <div class="count-info">Станций: ${point.stationsQuantity} <span> ${point.kvt}Квт</span></div>
                         </div>
-
                     </div>
                 </div>`;
         points.push([{lat: point.latitude, lng: point.longitude}, description])
