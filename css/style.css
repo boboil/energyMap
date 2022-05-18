@@ -1,0 +1,193 @@
+/*
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map.
+ */
+#map {
+    height: 100%;
+}
+
+/*
+ * Optional: Makes the sample page fill the window.
+ */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+li::marker {
+    content: ''
+}
+
+
+.container {
+    font-family: 'Graphik LCG';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 24px;
+
+    width: 320px;
+    height: 515px;
+    padding: 24px 16px;
+}
+
+.filter-top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 12px;
+}
+
+.info-top {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 178px;
+}
+
+.hug-left {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 12px;
+}
+
+.green-hug {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 5px;
+    gap: 10px;
+
+    background: #1DC302;
+    border-radius: 4px;
+
+    font-family: 'Graphik LCG';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+
+    color: #FFFFFF;
+}
+
+.hug-right {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 12px;
+}
+
+.address-top {
+    font-family: 'Graphik LCG';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: rgba(29, 29, 29, 0.5);
+}
+
+.working-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 8px;
+}
+
+.working-block h2 {
+    font-family: 'Graphik LCG';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #1D1D1D;
+}
+
+.working-time {
+    font-family: 'Graphik LCG';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.working-address span {
+    display: block;
+    color: rgba(29, 29, 29, 0.5);
+}
+
+.road-link {
+    color: #0066FF;
+}
+
+.active-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 10px;
+}
+
+.station-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    gap: 4px;
+    background: #FBFBFB;
+    border-radius: 0 2px 2px 0;
+    width: 100%;
+
+}
+
+.station-info:before {
+    content: '';
+    width: 2px;
+    height: 36px;
+
+    background: #BFBFBF;
+}
+
+.id-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4px 0;
+    color: #1D1D1D;
+}
+.count-info{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0;
+    gap: 8px;
+    color: #1D1D1D;
+}
+.count-info span{
+    color: #1DC402;
+}
+
+.station-img {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 4px;
+    gap: 10px;
+
+    width: 36px;
+    height: 36px;
+}
