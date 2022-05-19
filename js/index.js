@@ -2,11 +2,12 @@ let points = [];
 let pointsHandler = [];
 
 function parseJsaon() {
-    getJSON('/json/info.json',
+    getJSON('/json/fullData.json',
         function (err, data) {
             if (err !== null) {
                 return
             }
+            console.log(data)
             pointsHandler = data
 
         });
@@ -14,6 +15,7 @@ function parseJsaon() {
 function prepareTemplate(array) {
     points = [];
     array.forEach(point => {
+        let workingTime = point.open247 ? '24/7' : 'не кргулосуточно';
         let description = `<div class="filter-top">
                     <div class="info-top">
                         <div class="hug-left">
@@ -26,16 +28,16 @@ function prepareTemplate(array) {
                         </div>
                     </div>
                     <div class="address-top">
-                        <span>GB/T, GB/T 2, Caravan Mains Socket</span>
+                        <span>${point.poi_name}</span>
                     </div>
                     <div class="working-block">
                         <h2>${point.name}</h2>
                         <div class="working-time">
-                                <span>Пн-пт 09:00–20:00, Сб 09:00–18:00</span>
+                                <span>${workingTime}</span>
                         </div>
                     </div>
                     <div class="working-address">
-                        <span>${point.adress}</span>
+                        <span>${point.address}</span>
                         <span>${point.phone}</span>
                     </div>
                     <div class="road-link">
@@ -52,7 +54,7 @@ function prepareTemplate(array) {
                     <div class="station-info">
                         <img src="./images/station-icon.png" alt="station-icon" class="station-img">
                         <div class="id-info"><span>Three Phase (EU) (currently same ID)</span>
-                            <div class="count-info">Станций: ${point.stationsQuantity} <span> ${point.kvt}Квт</span></div>
+                            <div class="count-info">Станций: ${point.valid_outlets.length} <span> ${point.kvt}Квт</span></div>
                         </div>
                     </div>
                 </div>`;
@@ -73,22 +75,29 @@ function filterPoints(elem) {
         phase = true;
 
 
-    parseJsaon();
+    // parseJsaon();
 
-    let array = [];
-    pointsHandler.forEach(point => {
-        if (paid && point.workingHours)
-            array.push(point);
+    axios.get('/json/fullData.json').then((response) => {
+        pointsHandler = response.data;
+        let array = [];
+        pointsHandler.forEach(point => {
+            if (paid && point.cost)
+                array.push(point);
 
-        if (fast && point.kvt > 0)
-            array.push(point);
+            if (fast && point.kvt > 0)
+                array.push(point);
 
-        if (unpaid && !point.workingHours)
-            array.push(point);
-    });
+            if (unpaid && !point.cost)
+                array.push(point);
+        });
+        pointsHandler = array;
 
-    pointsHandler = array
-    initMap()
+        initMap()
+    }).then(response => response.json()).then(json => saveAs(
+        new Blob(
+            [JSON.stringify(json, null, 2)],
+            {type: "application/json;charset=" + document.characterSet}
+        ), "doc.json");
 }
 
 
