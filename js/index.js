@@ -2,14 +2,13 @@ let points = [];
 let pointsHandler = [];
 
 function parseJsaon() {
-    getJSON('/json/fullData.json',
+    getJSON('https://demonstration.org.ua/laravel/public/points-get',
         function (err, data) {
             if (err !== null) {
                 return
             }
-            console.log(data)
             pointsHandler = data
-
+            initMap()
         });
 }
 function prepareTemplate(array) {
@@ -28,12 +27,12 @@ function prepareTemplate(array) {
                         </div>
                     </div>
                     <div class="address-top">
-                        <span>${point.poi_name}</span>
+                        <span>${point.full_name}</span>
                     </div>
                     <div class="working-block">
                         <h2>${point.name}</h2>
                         <div class="working-time">
-                                <span>${workingTime}</span>
+                                <span>${point.working_time}</span>
                         </div>
                     </div>
                     <div class="working-address">
@@ -43,22 +42,22 @@ function prepareTemplate(array) {
                     <div class="road-link">
                         <a href="${point.url}">Проложить маршрут</a>
                     </div>
-                    <div class="cost-block">
-                        <p>Стоимость 2500₽/Квт</p>
-                        <p>Стоимость 2500₽/Квт</p>
-                        <p>Стоимость 2500₽/Квт</p>
-                    </div>
+                    <!--<div class="cost-block">-->
+                        <!--<p>Стоимость 2500₽/Квт</p>-->
+                        <!--<p>Стоимость 2500₽/Квт</p>-->
+                        <!--<p>Стоимость 2500₽/Квт</p>-->
+                    <!--</div>-->
                     <div class="active-block">
                         <span>${point.description}</span>
                     </div>
                     <div class="station-info">
                         <img src="./images/station-icon.png" alt="station-icon" class="station-img">
                         <div class="id-info"><span>Three Phase (EU) (currently same ID)</span>
-                            <div class="count-info">Станций: ${point.valid_outlets.length} <span> ${point.kvt}Квт</span></div>
+                            <div class="count-info">Станций: ${point.quantity} <span> ${point.kvt}Квт</span></div>
                         </div>
                     </div>
                 </div>`;
-        points.push([{lat: point.latitude, lng: point.longitude}, description])
+        points.push([{lat: parseFloat(point.latitude), lng: parseFloat(point.longitude)}, description])
     })
 
 }
@@ -77,14 +76,14 @@ function filterPoints(elem) {
 
     // parseJsaon();
 
-    axios.get('/json/fullData.json').then((response) => {
+    axios.get('https://demonstration.org.ua/laravel/public/points-get').then((response) => {
         pointsHandler = response.data;
         let array = [];
         pointsHandler.forEach(point => {
             if (paid && point.cost)
                 array.push(point);
 
-            if (fast && point.kvt > 0)
+            if (fast && point.kvt > 40)
                 array.push(point);
 
             if (unpaid && !point.cost)
@@ -93,11 +92,7 @@ function filterPoints(elem) {
         pointsHandler = array;
 
         initMap()
-    }).then(response => response.json()).then(json => saveAs(
-        new Blob(
-            [JSON.stringify(json, null, 2)],
-            {type: "application/json;charset=" + document.characterSet}
-        ), "doc.json");
+    });
 }
 
 
@@ -156,7 +151,7 @@ function initMap() {
             map,
             icon: image,
             title: `${title}`,
-            // label: `${i + 1}`,
+            label: ``,
             optimized: false,
         });
 

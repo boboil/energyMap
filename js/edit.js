@@ -1,6 +1,7 @@
 let dataSet = [];
 let pointsHandler;
-axios.get('/json/fullData.json').then((response) => {
+axios.get('https://demonstration.org.ua/laravel/public/points-get').then((response) => {
+    console.log(response.data)
     pointsHandler = response.data;
     pointsHandler.forEach(point => {
         let workingTime = point.open247 ? '24/7' : 'не кргулосуточно';
