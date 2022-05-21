@@ -3,9 +3,11 @@
 
     --black: #1d1d1d;
     --grey: #BFBFBF;
+    --grey-light: #fbfbfb;
     --blue: #0066FF;
     --yellow: #FFC700;
     --green: #1DC302;
+    --red: #EF4339;
 }
 
 @font-face {
@@ -19,6 +21,12 @@
     src: url('../fonts/GraphikLCG-Semibold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -157,7 +165,7 @@ body {
     padding: 4px 0;
     color: var(--black);
 }
-.count-info{
+.count-info {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -292,6 +300,140 @@ body {
 .control-btn svg {
     width: 32px;
     height: 32px;
+}
+
+.object {
+    position: fixed;
+    top: 74px;
+    left: 30px;
+    background-color: #fff;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 320px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 12px;
+    line-height: 14px;
+}
+.object-controls {
+    position: absolute;
+    z-index: 2;
+    right: 18px;
+    top: 27px;
+    display: flex;
+    align-items: center;
+}
+.object-controls button {
+    color: #979797;
+    border: 0;
+    background-color: transparent;
+}
+.object-controls button:not(:last-child) {
+    margin-right: 16px;
+}
+.object-power {
+    font-weight: 500;
+    color: #fff;
+    padding: 5px;
+    border-radius: 4px;
+}
+.object-power.green {
+    background-color: var(--green);
+}
+.object-plugs {
+    margin-top: 8px;
+    opacity: .5;
+}
+.object-title {
+    margin-top: 12px;
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+}
+.object-worktime {
+    margin-top: 8px;
+}
+.object-address {
+    margin-top: 8px;
+    opacity: .5;
+    font-style: normal;
+}
+.object-phone {
+    margin-top: 8px;
+    opacity: .5;
+    text-decoration: none;
+    color: var(--black);
+}
+.object-roadmap {
+    margin-top: 12px;
+    color: var(--blue);
+    text-decoration: none;
+}
+.object-prices {
+    margin-top: 12px;
+    line-height: 2;
+}
+.object-annotation {
+    margin-top: 12px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: var(--grey-light);
+}
+.object-availability {
+    margin-top: 12px;
+}
+.availability-item {
+    display: flex;
+    padding: 4px;
+    border-radius: 2px;
+    border-width: 0;
+    border-left-width: 1px;
+    border-style: solid;
+}
+.availability-item:not(:last-child) {
+    margin-bottom: 8px;
+}
+.availability-item.grey {
+    border-color: var(--grey);
+    background: var(--grey-light);
+}
+.availability-item.red {
+    border-color: var(--red);
+    background-color: rgba(239, 67, 57, 0.04);
+}
+.availability-item.green {
+    border-color: var(--green);
+    background: rgba(29, 195, 2, 0.04);
+}
+.availability-item .plug {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.availability-item .plug svg {
+    max-width: 28px;
+    max-height: 28px;
+    display: block;
+}
+.availability-item .text {
+    display: flex;
+    flex-wrap: wrap;
+}
+.availability-item .title {
+    width: 100%;
+}
+.availability-item .amount {
+    margin-right: 8px;
+}
+.availability-item .power {
+    font-weight: 500;
+    color: var(--green);
 }
 
 /* gmaps */
