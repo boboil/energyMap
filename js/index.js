@@ -99,7 +99,7 @@ function filterPoints(elem) {
             if (fast && point.kvt > 40)
                 array.push(point);
 
-            if (unpaid && !point.cost)
+            if (unpaid && point.cost === '0')
                 array.push(point);
         });
         pointsHandler = array;
@@ -145,7 +145,7 @@ function initMap() {
 
     var map = new google.maps.Map(document.getElementById('map'), opt);
     const image = {
-        url: "http://demonstration.org.ua/images/small.png",
+        url: "https://demonstration.org.ua/images/small.png",
         // This marker is 20 pixels wide by 32 pixels high.
         size: new google.maps.Size(60, 85),
         // The origin for this image is (0, 0).
