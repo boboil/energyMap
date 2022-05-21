@@ -8,7 +8,7 @@ function parseJsaon() {
                 return
             }
             pointsHandler = data
-            initMap()
+            getLocation()
         });
 }
 
@@ -104,7 +104,7 @@ function filterPoints(elem) {
         });
         pointsHandler = array;
 
-        initMap()
+        getLocation()
     });
 }
 
@@ -123,17 +123,36 @@ let getJSON = function (url, callback) {
     };
     xhr.send();
 };
+let options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
+
+function success(pos) {
+    const position = pos.coords;
+    initMap(position)
+}
+
+function error(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+}
 
 parseJsaon();
 
-
+function getLocation() {
+    navigator.geolocation.getCurrentPosition(success, error, options);
+}
 let activeInfoWindow;
 let markers = [];
 
-function initMap() {
+function initMap(position) {
     prepareTemplate(pointsHandler)
+    let latitude = position ? position.latitude : 44.58643148068905
+    let longitude = position ? position.longitude : 33.49257426439605
     let opt = {
-        center: {lat: 44.58643148068905, lng: 33.49257426439605},
+        center: {lat: latitude, lng: longitude},
         zoom: 7,
         maxZoom: 13,
         minZoom: 6,
@@ -143,7 +162,7 @@ function initMap() {
     };
 
 
-    var map = new google.maps.Map(document.getElementById('map'), opt);
+    let map = new google.maps.Map(document.getElementById('map'), opt);
     const image = {
         url: "https://demonstration.org.ua/images/small.png",
         // This marker is 20 pixels wide by 32 pixels high.
@@ -176,4 +195,9 @@ function initMap() {
 
         });
     });
+}
+
+function showFiters() {
+    const filters = document.getElementById('filters');
+    filters.classList.toggle("active");
 }
